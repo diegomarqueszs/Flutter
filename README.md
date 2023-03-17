@@ -8,6 +8,22 @@
   Curso - Criação de apps 
 </p>
 
+# Desenvolvimento Aplicativo
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
+
+## Scanner Plant:
+  Aplicativo para monitorar o tempo de flora de uma colheita ( André e Dureli).
+### Prototipo:
+ Link: https://www.figma.com/proto/90eaBWHXKrzIjgNYlPAaIx/Scanner-Plant?node-id=4-1024&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A171
+### Desenvolvimento:
+ Funcionalidades:
+  <br /> :heavy_check_mark: Busca por nomes - Tela: minhas plantas
+  <br /> :heavy_check_mark: Inserir novas plantas- Tela: minhas plantas
+  <br /> :heavy_check_mark: AppBar - Tela: minhas plantas
+  <br /> :heavy_check_mark: Exibir detalhes de plantas - Tela: minhas plantas
+
+# Curso
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 ## Contador de pessoas:
   Aplicativo que contabiliza o número de pessoas em um estabelecimento e muda dinamicamente o número durante a incrementação.
 ### Características:
@@ -26,9 +42,5 @@
    - Utilização de ListView
    - Entendimento do espaçamento e ordenação na tela (Coluna / Linhas)
 
- ## Scanner Plant:
-  Aplicativo para monitorar o tempo de flora de uma colheita ( André e Dureli).
-  ### Características:
-   - Utilização de câmera
-   - AppBar
+
     
