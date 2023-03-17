@@ -25,3 +25,10 @@
    - Criação de próprio widget
    - Utilização de ListView
    - Entendimento do espaçamento e ordenação na tela (Coluna / Linhas)
+
+ ## Scanner Plant:
+  Aplicativo para monitorar o tempo de flora de uma colheita ( André e Dureli).
+  ### Características:
+   - Utilização de câmera
+   - AppBar
+    
