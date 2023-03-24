@@ -8,33 +8,39 @@ import 'pages/yourPlants.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
-  static const title = 'Your Plantas';
+  static const title = 'Your Plantas'; //define titulo inicial
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  var _currentIndex = 0;
+  var _currentIndex = 0; //index do icone clicado
 
-  final PageStorageBucket bucket = PageStorageBucket();
   final List<Widget> screens = [YourPlants(), Clima(), Search(), Profile()];
 
+  ///lista todas as telas
+
   Widget currentScreen = YourPlants();
+
+  ///define tela atual
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageStorage(
-        child: currentScreen,
-        bucket: bucket,
-      ),
+      body: currentScreen,
       bottomNavigationBar: SalomonBottomBar(
+        ///widget de bottom bar
         currentIndex: _currentIndex,
+
+        /// define o index selecionado
         onTap: (i) => setState(() {
           _currentIndex = i;
           if (i < screens.length) {
+            /// verifica se a quantidade de icones equivale a quantidade de páginas
             currentScreen = screens[i];
+
+            ///define a tela de acordo com o icone
             print(_currentIndex);
           } else {
             print("Index não cadastrado");

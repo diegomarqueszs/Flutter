@@ -32,6 +32,12 @@ class _YourPlantState extends State<YourPlants> {
     });
   }
 
+  void _addPlant(PlantModel plant) {
+    setState(() {
+      your_plants.add(plant); //adiciona um novo objeto à lista de plantas
+    });
+  }
+
   void openCamera() {
     Navigator.push(
       context,
@@ -42,12 +48,15 @@ class _YourPlantState extends State<YourPlants> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => NovaPlantaScreen(
-                  image: file,
-                  plantsList: your_plants,
-                ),
+                builder: (context) => NovaPlantaScreen(image: file),
               ),
-            );
+            ).then((novaPlanta) {
+              if (novaPlanta != null) {
+                setState(() {
+                  _addPlant(novaPlanta);
+                });
+              }
+            });
           },
         ),
       ),

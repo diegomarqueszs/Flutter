@@ -6,11 +6,8 @@ import '../model/plant_model.dart';
 
 class NovaPlantaScreen extends StatefulWidget {
   final File image;
-  final List<PlantModel> plantsList;
 
-  const NovaPlantaScreen(
-      {Key? key, required this.image, required this.plantsList})
-      : super(key: key);
+  const NovaPlantaScreen({Key? key, required this.image}) : super(key: key);
 
   @override
   _NovaPlantaScreenState createState() => _NovaPlantaScreenState();
@@ -59,10 +56,9 @@ class _NovaPlantaScreenState extends State<NovaPlantaScreen> {
                   plant_local: local,
                   plant_percent: porcentagem,
                 );
-                widget.plantsList.add(novaPlanta);
 
-                // Voltar para a tela anterior
-                Navigator.pop(context);
+                // Voltar para a tela anterior com a nova planta como parâmetro
+                Navigator.pop(context, novaPlanta);
               },
               child: Text('Adicionar'),
             ),
