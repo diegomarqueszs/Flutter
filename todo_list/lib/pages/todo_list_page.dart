@@ -47,17 +47,18 @@ class _TodoListPageState extends State<TodoListPage> {
                       child: TextField(
                         controller: todosController,
                         decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Adicione uma tarefa',
-                            hintText: 'Estudar flutter',
-                            errorText: erroText,
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 2,
-                              ),
+                          border: OutlineInputBorder(),
+                          labelText: 'Adicione uma tarefa',
+                          hintText: 'Estudar flutter',
+                          errorText: erroText,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 2,
                             ),
-                            labelStyle: TextStyle(color: Colors.black)),
+                          ),
+                          labelStyle: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ),
                     SizedBox(
