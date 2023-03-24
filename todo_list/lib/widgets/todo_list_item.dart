@@ -19,11 +19,14 @@ class TodoListItem extends StatelessWidget {
         endActionPane: ActionPane(
           motion: const ScrollMotion(),
           dismissible: DismissiblePane(onDismissed: () {
+            ///bug
             onDelete(todo);
           }),
           children: [
             SlidableAction(
-              onPressed: onDelete(todo),
+              onPressed: (context) {
+                onDelete(todo);
+              },
               backgroundColor: const Color(0xFFFE4A49),
               foregroundColor: Colors.white,
               icon: Icons.delete,

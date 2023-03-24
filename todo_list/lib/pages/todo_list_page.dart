@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:todo_list/models/todo.dart';
+import 'package:todo_list/repositores/todo_repository.dart';
 import 'package:todo_list/widgets/todo_list_item.dart';
 
 class TodoListPage extends StatefulWidget {
@@ -13,10 +14,22 @@ class TodoListPage extends StatefulWidget {
 
 class _TodoListPageState extends State<TodoListPage> {
   final TextEditingController todosController = TextEditingController();
+  final TodoRepository todoRepository = TodoRepository();
 
   List<Todo> todos = [];
   Todo? deleteTodo;
   int? deleteTodoPos;
+  String? erroText;
+
+  @override
+  void initState() {
+    super.initState();
+    todoRepository.getTodoList().then((value) {
+      setState(() {
+        todos = value;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +47,17 @@ class _TodoListPageState extends State<TodoListPage> {
                       child: TextField(
                         controller: todosController,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Adicione uma tarefa',
-                          hintText: 'Estudar flutter',
-                        ),
+                            border: OutlineInputBorder(),
+                            labelText: 'Adicione uma tarefa',
+                            hintText: 'Estudar flutter',
+                            errorText: erroText,
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 2,
+                              ),
+                            ),
+                            labelStyle: TextStyle(color: Colors.black)),
                       ),
                     ),
                     SizedBox(
@@ -50,14 +70,24 @@ class _TodoListPageState extends State<TodoListPage> {
                       ),
                       onPressed: () {
                         String text = todosController.text;
+
+                        if (text.isEmpty) {
+                          setState(() {
+                            erroText = 'O titulo não pode ser vazio';
+                          });
+                          return;
+                        }
+
                         setState(() {
                           Todo newTodo = Todo(
                             tile: text,
                             dateTime: DateTime.now(),
                           );
                           todos.add(newTodo);
+                          erroText = null;
                         });
                         todosController.clear();
+                        todoRepository.saveTodoList(todos);
                       },
                       child: Icon(
                         Icons.add,
@@ -138,6 +168,7 @@ class _TodoListPageState extends State<TodoListPage> {
     setState(() {
       todos.clear();
     });
+    todoRepository.saveTodoList(todos);
   }
 
   void onDelete(Todo todo) {
@@ -146,6 +177,7 @@ class _TodoListPageState extends State<TodoListPage> {
     setState(() {
       todos.remove(todo);
     });
+    todoRepository.saveTodoList(todos);
 
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
@@ -163,6 +195,7 @@ class _TodoListPageState extends State<TodoListPage> {
             setState(() {
               todos.insert(deleteTodoPos!, deleteTodo!);
             });
+            todoRepository.saveTodoList(todos);
           },
           textColor: const Color(0xff00d7f3),
         ),
