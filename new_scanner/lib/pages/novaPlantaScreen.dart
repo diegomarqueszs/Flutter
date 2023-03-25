@@ -4,19 +4,18 @@ import 'package:flutter/material.dart';
 
 import '../model/plant_model.dart';
 
-class NovaPlantaScreen extends StatefulWidget {
+class NovaPlantaScreen extends StatelessWidget {
   final File image;
+  final Function(PlantModel) addPlant;
 
-  const NovaPlantaScreen({Key? key, required this.image}) : super(key: key);
+  NovaPlantaScreen({Key? key, required this.image, required this.addPlant})
+      : super(key: key);
 
-  @override
-  _NovaPlantaScreenState createState() => _NovaPlantaScreenState();
-}
-
-class _NovaPlantaScreenState extends State<NovaPlantaScreen> {
   // Variáveis para armazenar o título, local e porcentagem da nova planta
   String titulo = '';
+
   String local = '';
+
   int porcentagem = 0;
 
   @override
@@ -29,7 +28,7 @@ class _NovaPlantaScreenState extends State<NovaPlantaScreen> {
         child: Column(
           children: [
             // Exibir a imagem selecionada pelo usuário
-            Image.file(widget.image),
+            Image.file(image),
 
             // Formulário para preenchimento do título, local e porcentagem da nova planta
             TextFormField(
@@ -51,14 +50,14 @@ class _NovaPlantaScreenState extends State<NovaPlantaScreen> {
               onPressed: () {
                 // Criar a nova planta e adicioná-la à lista de plantas
                 final novaPlanta = PlantModel(
-                  plant_image: widget.image,
+                  plant_image: image,
                   plant_tile: titulo,
                   plant_local: local,
                   plant_percent: porcentagem,
                 );
-
+                addPlant(novaPlanta);
                 // Voltar para a tela anterior com a nova planta como parâmetro
-                Navigator.pop(context, novaPlanta);
+                Navigator.of(context).popUntil((route) => route.isFirst);
               },
               child: Text('Adicionar'),
             ),

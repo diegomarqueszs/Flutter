@@ -32,35 +32,35 @@ class _YourPlantState extends State<YourPlants> {
     });
   }
 
-  void _addPlant(PlantModel plant) {
+  void addPlant(PlantModel plant) {
     setState(() {
       your_plants.add(plant); //adiciona um novo objeto à lista de plantas
     });
   }
 
-  void openCamera() {
-    Navigator.push(
+  void openCamera() async {
+    final file = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => CameraCamera(
-          onFile: (file) {
-            // Navegar para a tela de preenchimento do título, local e porcentagem
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => NovaPlantaScreen(image: file),
-              ),
-            ).then((novaPlanta) {
-              if (novaPlanta != null) {
-                setState(() {
-                  _addPlant(novaPlanta);
-                });
-              }
-            });
+          onFile: (File file) {
+            Navigator.pop(context, file);
           },
         ),
       ),
     );
+
+    if (file != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NovaPlantaScreen(
+            image: file,
+            addPlant: addPlant,
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -82,14 +82,14 @@ class _YourPlantState extends State<YourPlants> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               "suas plantas",
               style: TextStyle(
                   color: Color(0xFF33691E),
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             TextField(
@@ -102,15 +102,15 @@ class _YourPlantState extends State<YourPlants> {
                     borderSide: BorderSide.none,
                   ),
                   hintText: ("Buscar planta"),
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   prefixIconColor: Colors.grey.shade900),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.00,
             ),
             Expanded(
               child: display_list?.length == 0
-                  ? Center(
+                  ? const Center(
                       child: Text(
                         "Nenhuma planta encontrada",
                         style: TextStyle(
@@ -120,10 +120,10 @@ class _YourPlantState extends State<YourPlants> {
                       ),
                     )
                   : ListView.builder(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       itemCount: display_list?.length,
                       itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.only(bottom: 15.0),
+                        padding: const EdgeInsets.only(bottom: 15.0),
                         child: GestureDetector(
                           onTap: () {
                             if (display_list?[index] != null) {
@@ -148,7 +148,7 @@ class _YourPlantState extends State<YourPlants> {
                               contentPadding: EdgeInsets.all(8.0),
                               title: Text(
                                 display_list?[index].plant_tile ?? '',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
                                 ),
