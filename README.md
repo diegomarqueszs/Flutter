@@ -41,6 +41,13 @@
    - Criação de próprio widget
    - Utilização de ListView
    - Entendimento do espaçamento e ordenação na tela (Coluna / Linhas)
+   - Persistência de Dados
+   - Widget Stables 
+   
+## Calculadora MMC:
+  Aplicativo para calcular a massa corporal.
+  ### Características:
+
 
 
     
